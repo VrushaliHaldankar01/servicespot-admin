@@ -1,0 +1,64 @@
+/* src/css/Footer.css */
+html, body {
+  height: 100%; /* Ensure the body takes full height */
+  margin: 0;
+}
+
+.container {
+  min-height: 100vh; /* Ensure the container takes full viewport height */
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.content {
+  flex: 1; /* Grow content to fill space between header and footer */
+}
+
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-info {
+  text-align: left;
+  flex: 1;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.footer-links a {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-info,
+  .footer-links {
+    margin-bottom: 10px;
+    flex: none;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+
+  .footer-links a {
+    margin: 5px 10px;
+  }
+}
