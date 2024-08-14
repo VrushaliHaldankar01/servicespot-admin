@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function EditSubCategory() {
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');

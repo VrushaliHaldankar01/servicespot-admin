@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Categories from './pages/Categories';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+
 import SubCategories from './pages/Subcategories';
 import PopularCategories from './pages/PopularCategories.js';
 import TrendingCategories from './pages/TrendingCategories.js';
