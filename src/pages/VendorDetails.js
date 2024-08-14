@@ -9,7 +9,6 @@ function VendorDetails() {
   const [viewForm, setViewForm] = useState(false);
   const [statusFilter, setStatusFilter] = useState(''); // State for status filter
   const [errorMessage, setErrorMessage] = useState(''); // State for error messages
-  const [status, setStatus] = useState(''); // State for selected vendor status
 
   // Fetch vendor data based on status filter
   useEffect(() => {
@@ -22,6 +21,7 @@ function VendorDetails() {
           }
         );
 
+        // Check if response has a message indicating no vendors found
         if (response.data.message) {
           setVendors([]);
           setErrorMessage(response.data.message);
@@ -30,6 +30,7 @@ function VendorDetails() {
           setErrorMessage('');
         }
       } catch (error) {
+        // Check if error response has a specific message
         if (
           error.response &&
           error.response.data &&
@@ -54,33 +55,7 @@ function VendorDetails() {
   // Handle the view action
   const handleViewClick = (vendor) => {
     setSelectedVendor(vendor);
-    setStatus(vendor.status); // Set the status of the selected vendor
     setViewForm(true);
-  };
-
-  // Handle status change
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
-  };
-
-  // Handle form submission to update vendor status
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.put(
-        `http://localhost:4000/vendor/updateStatus/${selectedVendor._id}`,
-        { status }
-      );
-      setVendors((prevVendors) =>
-        prevVendors.map((vendor) =>
-          vendor._id === selectedVendor._id ? { ...vendor, status } : vendor
-        )
-      );
-      setViewForm(false);
-    } catch (error) {
-      console.error('Error updating vendor status:', error);
-      setErrorMessage('An error occurred while updating vendor status.');
-    }
   };
 
   // Change page
@@ -204,6 +179,7 @@ function VendorDetails() {
             </>
           )}
 
+          {/* Display "No vendors found" message if there are no vendors and no error message */}
           {!errorMessage && vendors.length === 0 && (
             <div className='bg-gray-100 text-gray-700 p-4 mb-4 rounded'>
               No vendors found.
@@ -213,7 +189,7 @@ function VendorDetails() {
       ) : (
         <div className='bg-gray-100 p-4 rounded'>
           <h2 className='text-xl font-bold mb-4'>Vendor Information</h2>
-          <form onSubmit={handleFormSubmit}>
+          <form>
             <div className='mb-4'>
               <label className='block text-gray-700'>Business Name:</label>
               <input
@@ -269,24 +245,6 @@ function VendorDetails() {
                 />
               ))}
             </div>
-            <div className='mb-4'>
-              <label className='block text-gray-700'>Status:</label>
-              <select
-                value={status}
-                onChange={handleStatusChange}
-                className='w-full px-3 py-2 border rounded'
-              >
-                <option value='pending'>Pending</option>
-                <option value='approved'>Approved</option>
-                <option value='rejected'>Rejected</option>
-              </select>
-            </div>
-            <button
-              type='submit'
-              className='bg-blue-500 text-white px-3 py-1 rounded mr-2'
-            >
-              Update Status
-            </button>
             <button
               onClick={() => setViewForm(false)}
               className='bg-gray-500 text-white px-3 py-1 rounded'
