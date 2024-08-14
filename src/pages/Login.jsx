@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import './UserRegisterModule.css'; // Keep this if you have custom styles
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+// import Header from '../components/Header';
+// import Footer from '../components/Footer';
 import axios from 'axios'; // Import Axios
 import { Navigate } from 'react-router-dom';
 
